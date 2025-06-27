@@ -80,7 +80,7 @@ def game():
     for j in range(number):
                 print(player[j],"'s score =",playerScore[j])
     print("GAME OVER")
-
+game()
 
 
 
