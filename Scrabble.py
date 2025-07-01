@@ -39,14 +39,14 @@ def game():
     print("press 'E' to exit simulaton")
     print("thank u so much and enjoy ur experience")
     print(" ")
-    number = int(input("Enter number of Players playing"))
+    number = int(input("Enter number of Players playing "))
     player = []
     playerScore = []
     for i in range(number):
         name = input(f"Enter name of Player {i+1}: ")
         player.append(name)
         playerScore.append(0)
-    k=0
+    k=1
     while True:
         print("Round",k)
         for i in range(number):
