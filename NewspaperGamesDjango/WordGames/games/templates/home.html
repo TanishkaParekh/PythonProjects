@@ -1,0 +1,545 @@
+<div class="static-letters"></div><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Word Times</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;1,400&family=Old+Standard+TT:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(160, 82, 45, 0.1) 0%, transparent 50%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="0.3" fill="%23000" opacity="0.05"/><circle cx="80" cy="80" r="0.3" fill="%23000" opacity="0.05"/><circle cx="40" cy="60" r="0.3" fill="%23000" opacity="0.05"/><circle cx="60" cy="40" r="0.3" fill="%23000" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>'),
+                linear-gradient(135deg, #f8f5f0 0%, #ede7d9 100%);
+            font-family: 'Crimson Text', serif;
+            color: #2c1810;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .newspaper-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #ffffff 0%, #fefcf8 100%);
+            border: 4px solid #2c1810;
+            box-shadow: 
+                0 0 0 2px #8b4513,
+                0 20px 40px rgba(0,0,0,0.15),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newspaper-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 1px,
+                    rgba(139, 69, 19, 0.02) 1px,
+                    rgba(139, 69, 19, 0.02) 2px
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .masthead {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 30px 40px;
+            border-bottom: 6px double #2c1810;
+            background: linear-gradient(180deg, #fefcf8 0%, #f8f5f0 100%);
+        }
+
+        .date-weather {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-family: 'Old Standard TT', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #8b4513;
+        }
+
+        .weather {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .newspaper-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            color: #2c1810;
+            text-shadow: 2px 2px 0px rgba(139, 69, 19, 0.2);
+            letter-spacing: 3px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .newspaper-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #8b4513, transparent);
+        }
+
+        .tagline {
+            font-family: 'Crimson Text', serif;
+            font-size: 20px;
+            font-style: italic;
+            color: #8b4513;
+            margin-bottom: 10px;
+        }
+
+        .edition-info {
+            font-family: 'Old Standard TT', serif;
+            font-size: 14px;
+            color: #666;
+            font-weight: 700;
+        }
+
+        .main-content {
+            padding: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .featured-section {
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #2c1810;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: #8b4513;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .game-article {
+            background: linear-gradient(145deg, #ffffff 0%, #fefcf8 100%);
+            border: 3px solid #2c1810;
+            padding: 25px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .game-article::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: #8b4513;
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+            opacity: 0.1;
+        }
+
+        .game-article:hover {
+            transform: translateY(-8px) rotate(1deg);
+            box-shadow: 
+                0 15px 35px rgba(0,0,0,0.15),
+                0 5px 15px rgba(139, 69, 19, 0.2);
+            border-color: #8b4513;
+        }
+
+        .game-article:nth-child(even):hover {
+            transform: translateY(-8px) rotate(-1deg);
+        }
+
+        .game-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c1810;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            position: relative;
+        }
+
+        .game-subhead {
+            font-size: 18px;
+            color: #8b4513;
+            margin-bottom: 15px;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .game-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(139, 69, 19, 0.05);
+            border-radius: 5px;
+            font-size: 14px;
+            color: #8b4513;
+        }
+
+        .play-button {
+            display: inline-block;
+            background: linear-gradient(145deg, #2c1810 0%, #1a0f08 100%);
+            color: #fff;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-family: 'Old Standard TT', serif;
+            font-weight: 700;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .play-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .play-button:hover::before {
+            left: 100%;
+        }
+
+        .play-button:hover {
+            background: linear-gradient(145deg, #8b4513 0%, #5d2f0a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 24, 16, 0.3);
+        }
+
+        .newspaper-divider {
+            height: 4px;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    #2c1810 0px,
+                    #2c1810 10px,
+                    transparent 10px,
+                    transparent 20px
+                );
+            margin: 40px 0;
+        }
+
+        .scoreboard-section {
+            background: linear-gradient(145deg, #f8f5f0 0%, #ede7d9 100%);
+            border: 3px solid #8b4513;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scoreboard-section::before {
+            content: '🏆';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            font-size: 60px;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
+
+        .scoreboard-section::after {
+            content: '🏆';
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            font-size: 60px;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+
+        .scoreboard-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #8b4513;
+            margin-bottom: 15px;
+        }
+
+        .scoreboard-description {
+            font-size: 18px;
+            color: #5d4037;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .scoreboard-button {
+            background: linear-gradient(145deg, #b22222 0%, #8b0000 100%);
+            color: #fff;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-family: 'Old Standard TT', serif;
+            font-weight: 700;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scoreboard-button:hover {
+            background: linear-gradient(145deg, #dc143c 0%, #b22222 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(178, 34, 34, 0.4);
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-letter {
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: rgba(139, 69, 19, 0.1);
+            animation: float 20s infinite linear;
+        }
+
+        .static-letters {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .static-letters::before {
+            content: 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z';
+            position: absolute;
+            top: 20%;
+            left: -10%;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: rgba(139, 69, 19, 0.05);
+            transform: rotate(-5deg);
+            white-space: nowrap;
+            letter-spacing: 20px;
+        }
+
+        .static-letters::after {
+            content: 'W O R D G A M E S L E T T E R S F U N';
+            position: absolute;
+            bottom: 20%;
+            right: -10%;
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            color: rgba(139, 69, 19, 0.05);
+            transform: rotate(5deg);
+            white-space: nowrap;
+            letter-spacing: 15px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .date-weather {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .masthead {
+                padding: 20px;
+            }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    
+    <div class="newspaper-wrapper">
+        <header class="masthead">
+            <div class="date-weather">
+                <div class="date">
+                    {{ "now"|date:"l, F j, Y" }}
+                </div>
+                <div class="weather">
+                    <span>☀️ Perfect Weather for Word Games</span>
+                </div>
+                <div class="edition">
+                    <span>Edition: Wordplay Special</span>
+                </div>
+            </div>
+            
+            <h1 class="newspaper-title">THE WORD TIMES</h1>
+            <p class="tagline">Your Daily Dose of Linguistic Challenges</p>
+            <p class="edition-info">Est. 2024 • Circulation: ∞ Word Enthusiasts</p>
+        </header>
+
+        <main class="main-content">
+            <section class="featured-section">
+                <h2 class="section-header">Featured Word Games</h2>
+                
+                <div class="games-grid">
+                    <article class="game-article">
+                        <h3 class="game-headline">SCRABBLE SHOWDOWN</h3>
+                        <p class="game-subhead">Strategic Word Building at Its Finest</p>
+                        <div class="game-stats">
+                            <span>🎯 8 Letters</span>
+                            <span>⭐ Score Big</span>
+                            <span>🔥 Most Popular</span>
+                        </div>
+                        <p class="game-description">
+                            Master the art of strategic word placement! Use your 8 letters wisely to create 
+                            high-scoring words and dominate the board. Every letter counts in this classic 
+                            battle of vocabulary and strategy.
+                        </p>
+                        <a href="/scrabble/" class="play-button">Play Scrabble</a>
+                    </article>
+
+                    <article class="game-article">
+                        <h3 class="game-headline">SPELLATHON MARATHON</h3>
+                        <p class="game-subhead">The Ultimate Vocabulary Challenge</p>
+                        <div class="game-stats">
+                            <span>📝 14 Letters</span>
+                            <span>⏱️ Time Challenge</span>
+                            <span>💪 Endurance</span>
+                        </div>
+                        <p class="game-description">
+                            Put your vocabulary to the ultimate test! Create as many words as possible from 
+                            14 letters in this intense linguistic marathon. How many words can you discover 
+                            before time runs out?
+                        </p>
+                        <a href="/spellathon/" class="play-button">Play Spellathon</a>
+                    </article>
+
+                    <article class="game-article">
+                        <h3 class="game-headline">SCRAMBLE SOLVER</h3>
+                        <p class="game-subhead">Unravel the Mystery Words</p>
+                        <div class="game-stats">
+                            <span>🧩 3 Attempts</span>
+                            <span>🎲 Random Words</span>
+                            <span>⚡ Quick Play</span>
+                        </div>
+                        <p class="game-description">
+                            Think fast and unscramble the jumbled letters! You have just 3 attempts to 
+                            decode each mystery word. Perfect for quick gaming sessions and brain training.
+                        </p>
+                        <a href="/scramble/" class="play-button">Play Scramble</a>
+                    </article>
+                </div>
+            </section>
+
+            <div class="newspaper-divider"></div>
+
+            <section class="scoreboard-section pulse-animation">
+                <h2 class="scoreboard-title">HALL OF FAME</h2>
+                <p class="scoreboard-description">
+                    Witness the legends of wordplay! Check our leaderboard to see who reigns supreme 
+                    in the realm of letters and discover if you have what it takes to join the elite.
+                </p>
+                
+            </section>
+        </main>
+    </div>
+
+
+</body>
+</html>

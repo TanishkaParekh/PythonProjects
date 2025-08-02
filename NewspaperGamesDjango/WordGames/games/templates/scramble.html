@@ -1,0 +1,143 @@
+<div class="static-letters"></div><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Word Times</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;1,400&family=Old+Standard+TT:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(160, 82, 45, 0.1) 0%, transparent 50%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="0.3" fill="%23000" opacity="0.05"/><circle cx="80" cy="80" r="0.3" fill="%23000" opacity="0.05"/><circle cx="40" cy="60" r="0.3" fill="%23000" opacity="0.05"/><circle cx="60" cy="40" r="0.3" fill="%23000" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>'),
+                linear-gradient(135deg, #f8f5f0 0%, #ede7d9 100%);
+            font-family: 'Crimson Text', serif;
+            color: #2c1810;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .newspaper-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #ffffff 0%, #fefcf8 100%);
+            border: 4px solid #2c1810;
+            box-shadow: 
+                0 0 0 2px #8b4513,
+                0 20px 40px rgba(0,0,0,0.15),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newspaper-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 1px,
+                    rgba(139, 69, 19, 0.02) 1px,
+                    rgba(139, 69, 19, 0.02) 2px
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .masthead {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 30px 40px;
+            border-bottom: 6px double #2c1810;
+            background: linear-gradient(180deg, #fefcf8 0%, #f8f5f0 100%);
+        }
+
+        .date-weather {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-family: 'Old Standard TT', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #8b4513;
+        }
+
+        .weather {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .newspaper-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            color: #2c1810;
+            text-shadow: 2px 2px 0px rgba(139, 69, 19, 0.2);
+            letter-spacing: 3px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .newspaper-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #8b4513, transparent);
+        }
+
+        .tagline {
+            font-family: 'Crimson Text', serif;
+            font-size: 20px;
+            font-style: italic;
+            color: #8b4513;
+            margin-bottom: 10px;
+        }
+
+        .edition-info {
+            font-family: 'Old Standard TT', serif;
+            font-size: 14px;
+            color: #666;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper-wrapper">
+        <header class="masthead">
+            <div class="date-weather">
+                <div class="date">
+                    {{ "now"|date:"l, F j, Y" }}
+                </div>
+                <div class="weather">
+                    <span>☀️ Perfect Weather for Word Games</span>
+                </div>
+                <div class="edition">
+                    <span>Edition: Wordplay Special</span>
+                </div>
+            </div>
+            
+            <h1 class="newspaper-title">THE WORD TIMES</h1>
+            <p class="tagline">Your Daily Dose of Linguistic Challenges</p>
+            <p class="edition-info">Est. 2024 • Circulation: ∞ Word Enthusiasts</p>
+        </header>
+
+    <h1 style="text-align: centre;">Game Coming Soon</h1>
+</body>
+</html>
