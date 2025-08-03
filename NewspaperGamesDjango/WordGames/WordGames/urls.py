@@ -21,7 +21,9 @@ from games.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home),
-    path('scrabble/',scrabble),
+    path('scrabble/',scrabble,name='scrabble'),
+    path('scrabble/start/<int:player_num>/',scrabble_start,name='start_scrabble'),
     path('scramble/',scramble),
     path('spellathon/',spellathon)
+
 ]

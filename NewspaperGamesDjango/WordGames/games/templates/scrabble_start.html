@@ -336,8 +336,8 @@
     <div class="rules-container">
     <header class="header">
         <a href="http://127.0.0.1:8000/" class="back-link">← Back to Games</a>
-        <h1 class="page-title">SCRABBLE RULES</h1>
-        <p class="subtitle">Master the Art of Strategic Word Building</p>
+        <h1 class="page-title">SCRABBLE</h1>
+        <p class="subtitle">Let the games begin !</p>
     </header>
 
     <div class="content-wrapper">
@@ -437,15 +437,21 @@
             <h3>Ready to Play?</h3>
             <p>Set up your game by choosing the number of players. Scrabble supports 2-4 players for the best experience.</p>
             
-            
-            <form method="post" action="{% url 'scrabble' %}">
+            <form method="post" action="/scrabble/start/">
                 {% csrf_token %}
                 <div class="form-group">
-                    <!--{%csrf_token%} only used for post and put and delete methods tht modify the data-->
-                    {{ form.num_players }}
-                <button type="submit" class="start-button">Start Scrabble</button>
-                </div> 
-            </form>       
+                    <label for="num_players">Number of Players:</label>
+                    <select name="num_players" id="num_players" required>
+                        <option value="">Select Players</option>
+                        <option value="2">2 Players</option>
+                        <option value="3">3 Players</option>
+                        <option value="4">4 Players</option>
+                    </select>
+                </div>
+                               
+                <button type="submit" class="start-button">Start Scrabble Game</button>
+            </form>
+        </div>
     </div>
 </div>
 
